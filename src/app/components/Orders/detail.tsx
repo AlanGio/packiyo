@@ -46,6 +46,7 @@ const OrderDetail: React.FC<{ orderId: string }> = ({ orderId }) => {
   }
 
   const { attributes, relationships } = orderData;
+  console.log(orderData);
 
   return (
     <Container>

@@ -1,9 +1,10 @@
 import Products from "@/app/components/Products";
-import { Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
 import Orders from "@/app/components/Orders";
 import ThemeContainer from "@/app/theme/ThemeContainer";
+import Link from "next/link";
 
 export const getServerSideProps = (async () => {
   // Fetch data from external API
@@ -42,6 +43,13 @@ export default function Page({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <ThemeContainer>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Link href={`/order/create`}>
+          <Button variant="contained" color="secondary" size="large">
+            Create Order
+          </Button>
+        </Link>
+      </Box>
       <Typography variant="h2">Products</Typography>
       <Products products={products} />
       <hr />
