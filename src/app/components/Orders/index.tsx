@@ -1,6 +1,7 @@
 import React from "react";
-import { Typography, Paper, Grid } from "@mui/material";
+import { Typography, Paper, Grid, Button } from "@mui/material";
 import { OrderData } from "./orders.props";
+import Link from "next/link";
 
 const Orders = ({ orders }: { orders: OrderData[] }) => {
   return (
@@ -21,6 +22,11 @@ const Orders = ({ orders }: { orders: OrderData[] }) => {
               <Typography>
                 Total: ${order.attributes.total.toFixed(2)}
               </Typography>
+              <Link href={`/order/${order.id}`}>
+                <Button variant="contained" color="primary">
+                  View Order
+                </Button>
+              </Link>
             </Paper>
           </Grid>
         ))}

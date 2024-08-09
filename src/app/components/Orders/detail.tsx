@@ -7,10 +7,11 @@ import {
   CircularProgress,
 } from "@mui/material";
 import axios from "axios";
-import { OrderData } from "./orders.props";
+import { OrderDetailProps } from "./order.detail.props";
+import Link from "next/link";
 
 const OrderDetail: React.FC<{ orderId: string }> = ({ orderId }) => {
-  const [orderData, setOrderData] = useState<OrderData | null>(null);
+  const [orderData, setOrderData] = useState<OrderDetailProps | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -44,8 +45,11 @@ const OrderDetail: React.FC<{ orderId: string }> = ({ orderId }) => {
     return <Typography variant="h6">Order not found</Typography>;
   }
 
+  const { attributes, relationships } = orderData;
+
   return (
     <Container>
+      <Link href="/">Back</Link>
       <Typography variant="h4" gutterBottom>
         Order Details
       </Typography>
@@ -53,54 +57,73 @@ const OrderDetail: React.FC<{ orderId: string }> = ({ orderId }) => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Typography variant="h6">
-              Order Number: {orderData.attributes.number}
+              Order Number: {attributes.number}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">
-              Order Channel: {orderData.attributes.order_channel_name}
+              Status: {attributes.status_text}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">
-              Ordered At:{" "}
-              {new Date(orderData.attributes.ordered_at).toLocaleString()}
+              Shipping: ${attributes.shipping}
             </Typography>
           </Grid>
-          {/* Add more fields as needed */}
+          <Grid item xs={12}>
+            <Typography variant="h6">Tax: ${attributes.tax}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              Discount: ${attributes.discount}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">Total: ${attributes.total}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              Ordered At: {new Date(attributes.ordered_at).toLocaleString()}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              Updated At: {new Date(attributes.updated_at).toLocaleString()}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              Packing Note: {attributes.packing_note}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              Shipping Method: {attributes.shipping_method_name}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">Tags: {attributes.tags}</Typography>
+          </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">Shipping Information</Typography>
             <Typography>
-              Name:{" "}
-              {orderData.attributes.shipping_contact_information_data.name}
+              Name: {relationships.shipping_contact_information.data?.id}
             </Typography>
-            <Typography>
-              Address:{" "}
-              {orderData.attributes.shipping_contact_information_data.address}
-            </Typography>
-            {/* Add more shipping details as needed */}
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">Billing Information</Typography>
             <Typography>
-              Name: {orderData.attributes.billing_contact_information_data.name}
+              Name: {relationships.billing_contact_information.data?.id}
             </Typography>
-            <Typography>
-              Address:{" "}
-              {orderData.attributes.billing_contact_information_data.address}
-            </Typography>
-            {/* Add more billing details as needed */}
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">Order Items</Typography>
-            {orderData.attributes.order_item_data.map((item, index) => (
+            {relationships.order_items.data.map((item) => (
               <Paper
-                key={index}
+                key={item.id}
                 style={{ padding: "8px", marginBottom: "8px" }}
               >
-                <Typography>SKU: {item.sku}</Typography>
-                <Typography>Quantity: {item.quantity}</Typography>
-                <Typography>Price: ${item.price}</Typography>
+                <Typography>Item ID: {item.id}</Typography>
               </Paper>
             ))}
           </Grid>

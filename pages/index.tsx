@@ -1,19 +1,9 @@
 import Products from "@/app/components/Products";
-import {
-  Container,
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  IconButton,
-  Link,
-  CssBaseline,
-  ThemeProvider,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Typography } from "@mui/material";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { theme } from "@/app/theme/theme";
+
 import Orders from "@/app/components/Orders";
+import ThemeContainer from "@/app/theme/ThemeContainer";
 
 export const getServerSideProps = (async () => {
   // Fetch data from external API
@@ -50,71 +40,13 @@ export default function Page({
   products,
   orders,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(products, orders);
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar position="fixed">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Packiyo Management
-          </Typography>
-          <Link href="#" color="inherit" sx={{ ml: 2 }}>
-            Home
-          </Link>
-          <Link href="#" color="inherit" sx={{ ml: 2 }}>
-            Products
-          </Link>
-          <Link href="#" color="inherit" sx={{ ml: 2 }}>
-            Orders
-          </Link>
-        </Toolbar>
-      </AppBar>
-      <Container maxWidth="xl" sx={{ mt: 12 }}>
-        <Typography variant="h2">Products</Typography>
-        <Products products={products} />
-
-        <hr />
-        <Typography variant="h2">Orders</Typography>
-        <Orders orders={orders} />
-      </Container>
-      <Box
-        component="footer"
-        sx={{
-          py: 3,
-          px: 2,
-          mt: "auto",
-          backgroundColor: (theme) => theme.palette.grey[200],
-          position: "fixed",
-          bottom: 0,
-          width: "100%",
-        }}
-      >
-        <Container>
-          <Typography variant="body1">
-            © 2024 Packiyo. All rights reserved.
-          </Typography>
-          <Box sx={{ mt: 1 }}>
-            <Link href="#" color="inherit" sx={{ mr: 2 }}>
-              Privacy Policy
-            </Link>
-            <Link href="#" color="inherit" sx={{ mr: 2 }}>
-              Terms of Service
-            </Link>
-            <Link href="#" color="inherit">
-              Contact Us
-            </Link>
-          </Box>
-        </Container>
-      </Box>
-    </ThemeProvider>
+    <ThemeContainer>
+      <Typography variant="h2">Products</Typography>
+      <Products products={products} />
+      <hr />
+      <Typography variant="h2">Orders</Typography>
+      <Orders orders={orders} />
+    </ThemeContainer>
   );
 }

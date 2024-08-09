@@ -94,7 +94,3 @@ export interface OrderCreateData {
     };
   };
 }
-
-interface OrderCreateProps {
-  onSubmit: (orderData: OrderData) => void;
-}
