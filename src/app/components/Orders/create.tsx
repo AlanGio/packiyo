@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   TextField,
@@ -6,70 +6,85 @@ import {
   Grid,
   Typography,
   Link,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 import axios from "axios";
 import { OrderCreateData } from "./orders.props";
+import { redirect, useRouter } from "next/navigation";
 
-const orderId = Math.round(
-  Math.random() * (999999 - 100000) + 100000
-).toString();
-const OrderCreate: React.FC = () => {
-  const [orderData, setOrderData] = useState<OrderCreateData>({
-    type: "orders",
-    attributes: {
-      number: orderId,
-      order_channel_name: "Manual Order",
-      ordered_at: "2024-05-15 12:00:00",
-      hold_until: null,
-      ship_before: null,
-      external_id: 15,
-      shipping: 5.99,
-      tax: 50,
-      discount: 10,
-      packing_note: "Smile while packing!",
-      shipping_method_name: "SecondDay",
-      shipping_method_code: "0006",
-      tags: "wooden, priority",
-      shipping_contact_information_data: {
-        name: "Sarah Johnson",
-        company_name: "",
-        address: "123 Maple Street",
-        address2: "",
-        city: "Anytown",
-        state: "NY",
-        zip: "12345",
-        country: "US",
-        email: "api@packiyo.com",
-        phone: "555-123-4567",
-      },
-      billing_contact_information_data: {
-        name: "Sarah Johnson",
-        company_name: "",
-        address: "123 Maple Street",
-        address2: "",
-        city: "Anytown",
-        state: "NY",
-        zip: "12345",
-        country: "US",
-        email: "api@packiyo.com",
-        phone: "555-123-4567",
-      },
-      order_item_data: [
-        {
-          sku: "40224908181550",
-          quantity: 10,
-          external_id: "your-internal-order-item-id",
-          price: 59.99,
-        },
-      ],
+const initialValues: OrderCreateData = {
+  type: "orders",
+  attributes: {
+    number: "",
+    order_channel_name: "Manual Order",
+    ordered_at: "2024-05-15 12:00:00",
+    hold_until: null,
+    ship_before: null,
+    external_id: 0,
+    shipping: 5.99,
+    tax: 50,
+    discount: 10,
+    packing_note: "Smile while packing!",
+    shipping_method_name: "SecondDay",
+    shipping_method_code: "0006",
+    tags: "wooden, priority",
+    shipping_contact_information_data: {
+      name: "Sarah Johnson",
+      company_name: "",
+      address: "123 Maple Street",
+      address2: "",
+      city: "Anytown",
+      state: "NY",
+      zip: "12345",
+      country: "US",
+      email: "api@packiyo.com",
+      phone: "555-123-4567",
     },
-    relationships: {
-      customer: {
-        data: {
-          type: "customers",
-          id: "18",
-        },
+    billing_contact_information_data: {
+      name: "Sarah Johnson",
+      company_name: "",
+      address: "123 Maple Street",
+      address2: "",
+      city: "Anytown",
+      state: "NY",
+      zip: "12345",
+      country: "US",
+      email: "api@packiyo.com",
+      phone: "555-123-4567",
+    },
+    order_item_data: [
+      {
+        sku: "40224908181550",
+        quantity: 10,
+        external_id: "your-internal-order-item-id",
+        price: 59.99,
       },
+    ],
+  },
+  relationships: {
+    customer: {
+      data: {
+        type: "customers",
+        id: "18",
+      },
+    },
+  },
+};
+
+const generateRndId = () => {
+  return Math.round(Math.random() * (999999 - 100000) + 100000);
+};
+
+const OrderCreate: React.FC = () => {
+  const router = useRouter();
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [orderData, setOrderData] = useState<OrderCreateData>({
+    ...initialValues,
+    attributes: {
+      ...initialValues.attributes,
+      number: generateRndId().toString(),
+      external_id: generateRndId(),
     },
   });
 
@@ -101,11 +116,16 @@ const OrderCreate: React.FC = () => {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        setSuccessMessage("Order created successfully!");
+        router.push(`/order/${response.data.data.id}`);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSuccessMessage(null);
   };
 
   return (
@@ -173,6 +193,21 @@ const OrderCreate: React.FC = () => {
           </Grid>
         </Grid>
       </form>
+
+      <Snackbar
+        open={!!successMessage}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {successMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

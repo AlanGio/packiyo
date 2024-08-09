@@ -52,7 +52,6 @@ export default function Page({
       </Box>
       <Typography variant="h2">Products</Typography>
       <Products products={products} />
-      <hr />
       <Typography variant="h2">Orders</Typography>
       <Orders orders={orders} />
     </ThemeContainer>
