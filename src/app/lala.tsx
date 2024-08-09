@@ -1,14 +1,26 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import axios from "axios";
 
 export default function Home() {
+  const token = "JvmCXTBv50yxjltDKQ1qQOgUyx6s5QHpyBr5f87W";
+  const instance = axios.create({
+    baseURL: "http://generic.packiyo.com/api/v1",
+    timeout: 1000,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  useEffect(() => {
+    instance.get("/users/me").then((response) => {
+      console.log(response.data);
+    });
+  }, []);
+
+  console.log("PEPE");
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
+        Alan
         <div>
           <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
