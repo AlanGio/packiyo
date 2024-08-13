@@ -5,37 +5,25 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Orders from "@/app/components/Orders";
 import ThemeContainer from "@/app/theme/ThemeContainer";
 import Link from "next/link";
+import { API_URL, requestOptions } from "@/app/utils/config";
+import { ProductProps } from "@/app/components/Products/products.props";
+import { OrderDetailProps } from "@/app/components/Orders/order.detail.props";
 
 export const getServerSideProps = (async () => {
   // Fetch data from external API
-  var myHeaders = new Headers();
-  myHeaders.append("Accept", "application/vnd.api+json");
-  myHeaders.append(
-    "Authorization",
-    "Bearer 750|JvmCXTBv50yxjltDKQ1qQOgUyx6s5QHpyBr5f87W"
-  );
 
-  var requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    redirect: "follow" as RequestRedirect,
-  };
+  const productsRes = await fetch(`${API_URL}/products`, requestOptions);
+  const products = await productsRes.json();
 
-  const productsRes = await fetch(
-    "https://staging1.internal1.packiyo.com/api/v1/products",
-    requestOptions
-  );
-  const products: any = await productsRes.json();
-
-  const ordersRes = await fetch(
-    "https://staging1.internal1.packiyo.com/api/v1/orders",
-    requestOptions
-  );
-  const orders: any = await ordersRes.json();
+  const ordersRes = await fetch(`${API_URL}/orders`, requestOptions);
+  const orders = await ordersRes.json();
 
   // Pass data to the page via props
   return { props: { products: products.data, orders: orders.data } };
-}) satisfies GetServerSideProps<{ products: any; orders: any }>;
+}) satisfies GetServerSideProps<{
+  products: ProductProps[];
+  orders: OrderDetailProps[];
+}>;
 
 export default function Page({
   products,
@@ -50,8 +38,10 @@ export default function Page({
           </Button>
         </Link>
       </Box>
+
       <Typography variant="h2">Products</Typography>
       <Products products={products} />
+
       <Typography variant="h2">Orders</Typography>
       <Orders orders={orders} />
     </ThemeContainer>
