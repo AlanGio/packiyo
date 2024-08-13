@@ -6,35 +6,23 @@ import {
   Paper,
   CircularProgress,
 } from "@mui/material";
-import axios from "axios";
 import { OrderDetailProps } from "./order.detail.props";
 import Link from "next/link";
+import { serviceCall } from "@/app/utils/services";
 
 const OrderDetail: React.FC<{ orderId: string }> = ({ orderId }) => {
   const [orderData, setOrderData] = useState<OrderDetailProps | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: `https://staging1.internal1.packiyo.com/api/v1/orders/${orderId}`,
-      headers: {
-        Accept: "application/vnd.api+json",
-        "Content-Type": "application/vnd.api+json",
-        Authorization: "Bearer 750|JvmCXTBv50yxjltDKQ1qQOgUyx6s5QHpyBr5f87W",
-      },
-    };
-
-    axios(config)
-      .then((response) => {
-        setOrderData(response.data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching order data:", error);
-        setLoading(false);
-      });
+    serviceCall(`/orders/${orderId}`, (response) => {
+      if (response instanceof Error) {
+        setOrderData(null);
+      } else {
+        setOrderData(response);
+      }
+      setLoading(false);
+    });
   }, [orderId]);
 
   if (loading) {
@@ -46,7 +34,6 @@ const OrderDetail: React.FC<{ orderId: string }> = ({ orderId }) => {
   }
 
   const { attributes, relationships } = orderData;
-  console.log(orderData);
 
   return (
     <Container>

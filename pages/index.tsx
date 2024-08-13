@@ -7,7 +7,7 @@ import ThemeContainer from "@/app/theme/ThemeContainer";
 import Link from "next/link";
 import { API_URL, requestOptions } from "@/app/utils/config";
 import { ProductProps } from "@/app/components/Products/products.props";
-import { OrderDetailProps } from "@/app/components/Orders/order.detail.props";
+import { OrderData } from "@/app/components/Orders/orders.props";
 
 export const getServerSideProps = (async () => {
   // Fetch data from external API
@@ -22,10 +22,10 @@ export const getServerSideProps = (async () => {
   return { props: { products: products.data, orders: orders.data } };
 }) satisfies GetServerSideProps<{
   products: ProductProps[];
-  orders: OrderDetailProps[];
+  orders: OrderData[];
 }>;
 
-export default function Page({
+export default function Index({
   products,
   orders,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
