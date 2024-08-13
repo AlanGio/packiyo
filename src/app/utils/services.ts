@@ -9,7 +9,7 @@ export const serviceCall = (
   const config = {
     method: method ?? "get",
     maxBodyLength: Infinity,
-    url: `${API_URL}sss${name}`,
+    url: `${API_URL}${name}`,
     headers: {
       Accept: "application/vnd.api+json",
       "Content-Type": "application/vnd.api+json",
