@@ -4,6 +4,7 @@ import { API_URL } from "./config";
 export const serviceCall = (
   name: string,
   callback: (param: any) => void,
+  data?: any,
   method?: "get" | "post" | "put" | "delete"
 ) => {
   const config = {
@@ -15,6 +16,7 @@ export const serviceCall = (
       "Content-Type": "application/vnd.api+json",
       Authorization: "Bearer 750|JvmCXTBv50yxjltDKQ1qQOgUyx6s5QHpyBr5f87W",
     },
+    ...data,
   };
 
   axios(config)
