@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderDetail renders 'Order not found' when orderData is null 1`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Order not found
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 1`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Order Number: 
+  12345
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 2`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Status: 
+  Pending
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 3`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Shipping: $
+  10
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 4`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Tax: $
+  2
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 5`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Discount: $
+  5
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 6`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Total: $
+  100
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 7`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Packing Note: 
+  Handle with care
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 8`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  Shipping Method: 
+  Standard
+</h6>
+`;
+
+exports[`OrderDetail renders order details correctly 9`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Name: 
+  John Doe
+</p>
+`;
+
+exports[`OrderDetail renders order details correctly 10`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Name: 
+  Jane Smith
+</p>
+`;
+
+exports[`OrderDetail renders order details correctly 11`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Item ID: 
+  item1
+</p>
+`;
+
+exports[`OrderDetail renders order details correctly 12`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Item ID: 
+  item2
+</p>
+`;

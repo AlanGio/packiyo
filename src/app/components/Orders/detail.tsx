@@ -1,34 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Typography,
-  Grid,
-  Paper,
-  CircularProgress,
-} from "@mui/material";
+import { Container, Typography, Grid, Paper } from "@mui/material";
 import { OrderDetailProps } from "./order.detail.props";
 import Link from "next/link";
-import { serviceCall } from "@/app/utils/services";
 
-const OrderDetail: React.FC<{ orderId: string }> = ({ orderId }) => {
-  const [orderData, setOrderData] = useState<OrderDetailProps | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    serviceCall(`/orders/${orderId}`, (response) => {
-      if (response instanceof Error) {
-        setOrderData(null);
-      } else {
-        setOrderData(response);
-      }
-      setLoading(false);
-    });
-  }, [orderId]);
-
-  if (loading) {
-    return <CircularProgress />;
-  }
-
+const OrderDetail: React.FC<{ orderData: OrderDetailProps | null }> = ({
+  orderData,
+}) => {
   if (!orderData) {
     return <Typography variant="h6">Order not found</Typography>;
   }

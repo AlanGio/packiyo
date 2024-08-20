@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Orders component renders orders correctly 1`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  123
+</h6>
+`;
+
+exports[`Orders component renders orders correctly 2`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Status: 
+  Pending
+</p>
+`;
+
+exports[`Orders component renders orders correctly 3`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Shipping: $
+  10.00
+</p>
+`;
+
+exports[`Orders component renders orders correctly 4`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Tax: $
+  2.50
+</p>
+`;
+
+exports[`Orders component renders orders correctly 5`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Discount: $
+  5.00
+</p>
+`;
+
+exports[`Orders component renders orders correctly 6`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Total: $
+  17.50
+</p>
+`;
+
+exports[`Orders component renders orders correctly 7`] = `
+<h6
+  class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+>
+  456
+</h6>
+`;
+
+exports[`Orders component renders orders correctly 8`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Status: 
+  Completed
+</p>
+`;
+
+exports[`Orders component renders orders correctly 9`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Shipping: $
+  15.00
+</p>
+`;
+
+exports[`Orders component renders orders correctly 10`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Tax: $
+  3.75
+</p>
+`;
+
+exports[`Orders component renders orders correctly 11`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Discount: $
+  7.50
+</p>
+`;
+
+exports[`Orders component renders orders correctly 12`] = `
+<p
+  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+>
+  Total: $
+  26.25
+</p>
+`;
